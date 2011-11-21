@@ -1,10 +1,14 @@
+require 'dashboard'
+
 class Board
+  include Dashboard
+
   def initialize(params)
-    @rows = params["rows"]
-    @columns = params["columns"]
-    @width = params["width"]
-    @height = params["height"]
-    @margin = params["margin"]
+    @rows = validate_integer "rows", params["rows"]
+    @columns = validate_integer "columns", params["columns"]
+    @width = validate_integer "width", params["width"]
+    @height = validate_integer "height", params["height"]
+    @margin = validate_integer "margin", params["margin"]
     @color = params["color"]
 
     @dashes = params["dashes"].keys.map do |dash|
