@@ -1,3 +1,4 @@
 *.gem
 *.rbc
 .idea/
+/data/config.yml
