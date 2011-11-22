@@ -11,7 +11,7 @@ class TestDashboard < Test::Unit::TestCase
       Dashboard.validate_integer :test, 'not_integer'
     end
 
-    assert_equal(5, Dashboard.validate_integer(:test, 5), 'Successful call to validate_integer should return value')
+    assert_equal 5, Dashboard.validate_integer(:test, 5), 'Successful call to validate_integer should return value'
   end
 
   def test_initialization
