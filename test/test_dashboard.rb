@@ -21,7 +21,8 @@ class TestDashboard < Test::Unit::TestCase
       Dashboard::Board.new config
     end
 
-    config['dashes'] = {'test' => {'row' => 1, 'column' => 1, 'width' => 2, 'height' => 2, 'data' => {'key' => 'value'}}}
+    config['dashes'] = {'test' => {'row' => 1, 'column' => 1, 'width' => 2, 'height' => 2,
+                                   'data' => {'key' => 'value'}}}
 
     dashboard = Dashboard::Board.new config
     assert_equal 2, dashboard.rows

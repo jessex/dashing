@@ -6,6 +6,6 @@ require 'dashboard'
 require 'YAML'
 
 CONFIG_FILE = 'data/config.yml'
-CONFIGURATION = YAML::load_file(CONFIG_FILE)
+CONFIGURATION = YAML::load_file CONFIG_FILE
 
 dashboard = Dashboard::Board.new CONFIGURATION
