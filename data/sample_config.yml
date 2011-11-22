@@ -3,3 +3,14 @@ columns: 4
 width: 1440
 height: 900
 margin: 10
+dashes:
+  test_1:
+    row: 0
+    column: 0
+    width: 1
+    height: 2
+  test_2:
+    row: 0
+    column: 1
+    width: 1
+    height: 2
