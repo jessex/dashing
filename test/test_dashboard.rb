@@ -1,4 +1,4 @@
-require 'dashboard'
+require 'dashing/dashboard'
 require 'test/unit'
 
 class TestDashboard < Test::Unit::TestCase
