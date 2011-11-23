@@ -9,6 +9,10 @@ dashes:
     column: 0
     width: 1
     height: 2
+    data:
+      - Data Item 1
+      - Data Item 2
+      - Data Item 3
   test_2:
     row: 0
     column: 1
