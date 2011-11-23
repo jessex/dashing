@@ -65,9 +65,12 @@ module Dashboard
       @dashes = params['dashes'].keys.map do |dash|
         Dash.new dash, params['dashes'][dash]
       end
+
+      @row_height = (@height - ((@rows - 1) * @margin)) / @rows
+      @column_width = (@width - ((@columns - 1) * @margin)) / @columns
     end
 
-    attr_accessor :rows, :columns, :width, :height, :margin, :color, :dashes
+    attr_accessor :rows, :columns, :width, :height, :margin, :color, :dashes, :row_height, :column_width
   end
 
   class Dash
