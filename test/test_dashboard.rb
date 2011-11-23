@@ -14,10 +14,63 @@ class TestDashboard < Test::Unit::TestCase
     assert_equal 5, Dashboard.validate_integer(:test, 5), 'Successful call to validate_integer should return value'
   end
 
+  def test_validate_layout
+    config = {'rows' => 3, 'columns' => 3, 'width' => 1440, 'height' => 900, 'margin' => 10,
+    'dashes' => {'test' => {'row' => 0, 'column' => 0, 'width' => 2, 'height' => 2}}}
+
+    dashboard = Dashboard::Board.new config
+
+    assert_nothing_raised ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+    dash = {'row' => 0, 'column' => 2, 'width' => 1, 'height' => 3}
+    dashboard.dashes << (Dashboard::Dash.new 'test_2', dash)
+
+    assert_nothing_raised ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+    dashboard.dashes[1].width = 2
+
+    assert_raise ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+    dashboard.dashes[1].width = 1
+    dashboard.dashes[1].height = 4
+
+    assert_raise ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+    dashboard.dashes[1].height = 0
+
+    assert_raise ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+    dashboard.dashes[1].height = 3
+
+    dash = {'row' => 2, 'column' => 0, 'width' => 2, 'height' => 1}
+    dashboard.dashes << (Dashboard::Dash.new 'test_3', dash)
+
+    assert_nothing_raised ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+    dashboard.rows = 0
+
+    assert_raise ArgumentError do
+      Dashboard.validate_layout dashboard
+    end
+
+  end
+
   def test_initialization
     config = {'rows' => 2, 'columns' => 4, 'width' => 1440, 'height' => 900, 'margin' => 10}
 
-    assert_raise NoMethodError do
+    assert_raise ArgumentError do
       Dashboard::Board.new config
     end
 
