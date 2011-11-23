@@ -1,8 +1,53 @@
 module Dashboard
   def Dashboard.validate_integer(name, value)
-    raise(ArgumentError, "Value for dashboard parameter #{name} was nil, caller") if value.nil?
+    raise(ArgumentError, "Value for dashboard parameter #{name} was nil", caller) if value.nil?
     raise(ArgumentError, "Value for dashboard parameter #{name} was not an integer", caller) if !value.is_a? Integer
     value
+  end
+
+  def Dashboard.validate_layout(board)
+    layout = Hash.new('')
+
+    params = ['rows', 'columns', 'width', 'height']
+    params.each do |param|
+      if eval("board.#{param}") < 1
+        raise ArgumentError, "Value '#{param}' for board invalid: less than 1", caller
+      end
+    end
+
+    board.dashes.each do |dash|
+
+      params = ['row', 'column', 'width', 'height']
+      params.each do |param|
+        threshold = 1
+        if param.eql? 'row' or param.eql? 'column'
+          threshold = 0
+        end
+
+        if eval("dash.#{param}") < threshold
+          raise ArgumentError, "Value '#{param}' for dash #{dash.name} invalid: less than #{threshold}", caller
+        end
+      end
+
+      if dash.row + dash.height > board.rows
+        raise ArgumentError, "Dash #{dash.name} has too great of a height", caller
+      end
+      if dash.column + dash.width > board.columns
+        raise ArgumentError, "Dash #{dash.name} has too great of a width", caller
+      end
+
+      dash.row.upto(dash.row + dash.height - 1) do |i|
+        dash.column.upto(dash.column + dash.width - 1) do |j|
+          if !''.eql? layout[[i,j]]
+            raise ArgumentError,
+                  "Dash #{dash.name} overlaps with dash #{layout[[i,j]]} at row #{i} and column #{j}", caller
+          else
+            layout[[i, j]] = dash.name
+          end
+        end
+      end
+
+    end
   end
 
   class Board
@@ -14,12 +59,13 @@ module Dashboard
       @margin = Dashboard.validate_integer 'margin', params['margin']
       @color = params['color']
 
+      raise(ArgumentError, 'Configured board contained no dashes', caller) if params['dashes'].nil?
       @dashes = params['dashes'].keys.map do |dash|
         Dash.new dash, params['dashes'][dash]
       end
     end
 
-    attr_reader :rows, :columns, :width, :height, :margin, :color, :dashes
+    attr_accessor :rows, :columns, :width, :height, :margin, :color, :dashes
   end
 
   class Dash
@@ -32,6 +78,6 @@ module Dashboard
       @data = params['data']
     end
 
-    attr_reader :name, :row, :column, :width, :height, :data
+    attr_accessor :name, :row, :column, :width, :height, :data
   end
 end
