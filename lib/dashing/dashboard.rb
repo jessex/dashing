@@ -1,4 +1,8 @@
 module Dashboard
+
+  class LayoutError < ArgumentError
+  end
+
   def Dashboard.validate_integer(name, value)
     raise(ArgumentError, "Value for dashboard parameter #{name} was nil", caller) if value.nil?
     raise(ArgumentError, "Value for dashboard parameter #{name} was not an integer", caller) if !value.is_a? Integer
@@ -8,38 +12,36 @@ module Dashboard
   def Dashboard.validate_layout(board)
     layout = Hash.new('')
 
-    params = ['rows', 'columns', 'width', 'height']
-    params.each do |param|
+    for param in ['rows', 'columns', 'width', 'height'] do
       if eval("board.#{param}") < 1
-        raise ArgumentError, "Value '#{param}' for board invalid: less than 1", caller
+        raise LayoutError, "Value '#{param}' for board invalid: less than 1", caller
       end
     end
 
     board.dashes.each do |dash|
 
-      params = ['row', 'column', 'width', 'height']
-      params.each do |param|
+      for param in ['row', 'column', 'width', 'height'] do
         threshold = 1
         if param.eql? 'row' or param.eql? 'column'
           threshold = 0
         end
 
         if eval("dash.#{param}") < threshold
-          raise ArgumentError, "Value '#{param}' for dash #{dash.name} invalid: less than #{threshold}", caller
+          raise LayoutError, "Value '#{param}' for dash #{dash.name} invalid: less than #{threshold}", caller
         end
       end
 
       if dash.row + dash.height > board.rows
-        raise ArgumentError, "Dash #{dash.name} has too great of a height", caller
+        raise LayoutError, "Dash #{dash.name} has too great of a height", caller
       end
       if dash.column + dash.width > board.columns
-        raise ArgumentError, "Dash #{dash.name} has too great of a width", caller
+        raise LayoutError, "Dash #{dash.name} has too great of a width", caller
       end
 
       dash.row.upto(dash.row + dash.height - 1) do |i|
         dash.column.upto(dash.column + dash.width - 1) do |j|
           if !''.eql? layout[[i,j]]
-            raise ArgumentError,
+            raise LayoutError,
                   "Dash #{dash.name} overlaps with dash #{layout[[i,j]]} at row #{i} and column #{j}", caller
           else
             layout[[i, j]] = dash.name

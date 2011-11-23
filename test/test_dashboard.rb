@@ -20,33 +20,33 @@ class TestDashboard < Test::Unit::TestCase
 
     dashboard = Dashboard::Board.new config
 
-    assert_nothing_raised ArgumentError do
+    assert_nothing_raised Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
     dash = {'row' => 0, 'column' => 2, 'width' => 1, 'height' => 3}
     dashboard.dashes << (Dashboard::Dash.new 'test_2', dash)
 
-    assert_nothing_raised ArgumentError do
+    assert_nothing_raised Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
     dashboard.dashes[1].width = 2
 
-    assert_raise ArgumentError do
+    assert_raise Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
     dashboard.dashes[1].width = 1
     dashboard.dashes[1].height = 4
 
-    assert_raise ArgumentError do
+    assert_raise Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
     dashboard.dashes[1].height = 0
 
-    assert_raise ArgumentError do
+    assert_raise Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
@@ -55,13 +55,13 @@ class TestDashboard < Test::Unit::TestCase
     dash = {'row' => 2, 'column' => 0, 'width' => 2, 'height' => 1}
     dashboard.dashes << (Dashboard::Dash.new 'test_3', dash)
 
-    assert_nothing_raised ArgumentError do
+    assert_nothing_raised Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
     dashboard.rows = 0
 
-    assert_raise ArgumentError do
+    assert_raise Dashboard::LayoutError do
       Dashboard.validate_layout dashboard
     end
 
