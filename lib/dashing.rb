@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << File.join(File.dirname(__FILE__), '../lib/dashing')
+$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib', 'dashing')
 
-require 'dashboard'
 require 'YAML'
 
-CONFIG_FILE = 'data/config.yml'
-CONFIGURATION = YAML::load_file CONFIG_FILE
+require 'configuration'
+require 'dashboard'
+Dir[File.join(File.dirname(__FILE__), 'dashing', 'modules')].each { |file| require file }
 
-dashboard = Dashboard::Board.new CONFIGURATION
+configuration = Configuration.load_configuration
+dashboard = Dashboard::Board.new configuration
+Dashboard.validate_layout dashboard
