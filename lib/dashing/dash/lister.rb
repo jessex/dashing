@@ -4,7 +4,7 @@ class Lister
   include Dash
 
   def self.get_erb_locals(data)
-    Dashboard.validate_none_null 'Lister', data, ['title', 'ordered']
+    Dash.validate_none_null 'Lister', data, ['title', 'ordered']
 
     data['ordered'] ||= false
 
