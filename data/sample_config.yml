@@ -10,6 +10,9 @@ dashes:
     width: 1
     height: 2
     data:
+      title: 'Test List'
+      ordered: false
+      list:
       - Data Item 1
       - Data Item 2
       - Data Item 3
