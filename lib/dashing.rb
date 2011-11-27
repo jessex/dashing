@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib', 'dashing')
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'dashing')
 
 require 'configuration'
 require 'dashboard'
