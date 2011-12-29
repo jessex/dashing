@@ -2,3 +2,5 @@
 *.rbc
 .idea/
 /data/config.yml
+
+.DS_STORE
