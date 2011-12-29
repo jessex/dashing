@@ -83,13 +83,15 @@ module Dashboard
   class Dash
     def initialize(name, params)
       @name = name
+      @type = params['type']
       @row = Dashboard.validate_integer 'row', params['row']
       @column = Dashboard.validate_integer 'column', params['column']
       @width = Dashboard.validate_integer 'width', params['width']
       @height = Dashboard.validate_integer 'height', params['height']
+      @refresh_rate = params['refresh_rate']
       @data = params['data']
     end
 
-    attr_accessor :name, :row, :column, :width, :height, :data
+    attr_accessor :name, :type, :row, :column, :width, :height, :refresh_rate, :data
   end
 end

@@ -100,6 +100,7 @@ class TestDashboard < Test::Unit::TestCase
     assert_equal 1, dash.column
     assert_equal 2, dash.width
     assert_equal 2, dash.height
+    assert_nil dash.refresh_rate, 'Did not specify refresh rate, should be nil'
 
     dash_data = dash.data
     assert_equal 1, dash_data.length, 'Should be only one key-value data pair for the dash'

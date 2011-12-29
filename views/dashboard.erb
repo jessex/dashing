@@ -3,7 +3,9 @@
         <title><%= board.title %></title>
         <link rel="stylesheet" type="text/css" href="css/text.css" />
         <link rel="stylesheet" type="text/css" href="css/board.css" />
+        <script type="text/javascript" src="js/jquery.min.js"></script>
     </head>
+
     <body bgcolor="<%= board.color%>">
         <div class="board" style="width: <%= board.width %>px; height: <%= board.height %>px;">
             <% board.dashes.each do |dash| %>
@@ -15,4 +17,17 @@
             <% end %>
         </div>
     </body>
+
+    <script type="text/javascript">
+        var load_dash = function(dash) {
+            $('#' + dash).load('/dash/' + dash);
+        };
+
+        <% board.dashes.each do |dash| %>
+            load_dash('<%= dash.name %>');
+            <% unless dash.refresh_rate.nil? %>
+                setInterval(function() { load_dash('<%= dash.name %>'); }, <%= dash.refresh_rate %>);
+            <% end %>
+        <% end %>
+    </script>
 </html>

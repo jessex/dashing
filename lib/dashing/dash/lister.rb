@@ -1,9 +1,9 @@
-require 'dashing/dash'
+require File.join(File.dirname(__FILE__), %w[.. dash])
 
 class Lister
   include Dash
 
-  def get_erb_locals(data)
+  def self.get_erb_locals(data)
     Dash.validate_none_nil 'Lister', data, ['title', 'list']
 
     data['ordered'] ||= false

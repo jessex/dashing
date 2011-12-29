@@ -6,20 +6,29 @@ height: 900
 margin: 10
 color: '#00CCDD'
 dashes:
-  test_1:
+  lister:
     row: 0
     column: 0
     width: 1
     height: 2
+    refresh_rate: 10000
     data:
       title: 'Test List'
       ordered: false
       list:
-      - Data Item 1
-      - Data Item 2
-      - Data Item 3
-  test_2:
+      - Lister 1 Item 1
+      - Lister 1 Item 2
+      - Lister 1 Item 3
+  lister:
     row: 0
     column: 1
     width: 1
     height: 2
+    refresh_rate: 5000
+    data:
+      title: 'Another List'
+      ordered: true
+      list:
+      - Lister 2 Item 1
+      - Lister 2 Item 2
+      - Lister 2 Item 3
