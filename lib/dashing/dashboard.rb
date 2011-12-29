@@ -61,6 +61,10 @@ module Dashboard
       @margin = Dashboard.validate_integer 'margin', params['margin']
       @color = params['color']
 
+      if @rows < 1 or @columns < 1 or @height < 1 or @width < 1
+        raise ArgumentError, "None of row count, column count, height or width for board can be less than 1", caller
+      end
+
       raise(ArgumentError, 'Configured board contained no dashes', caller) if params['dashes'].nil?
       @dashes = params['dashes'].keys.map do |dash|
         Dash.new dash, params['dashes'][dash]

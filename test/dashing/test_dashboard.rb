@@ -15,9 +15,14 @@ class TestDashboard < Test::Unit::TestCase
   end
 
   def test_validate_layout
-    config = {'rows' => 3, 'columns' => 3, 'width' => 1440, 'height' => 900, 'margin' => 10,
+    config = {'rows' => 3, 'columns' => 0, 'width' => 1440, 'height' => 900, 'margin' => 10,
     'dashes' => {'test' => {'row' => 0, 'column' => 0, 'width' => 2, 'height' => 2}}}
 
+    assert_raise ArgumentError do
+      Dashboard::Board.new config
+    end
+
+    config['columns'] = 3
     dashboard = Dashboard::Board.new config
 
     assert_nothing_raised Dashboard::LayoutError do
