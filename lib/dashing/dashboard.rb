@@ -61,6 +61,9 @@ module Dashboard
       @margin = Dashboard.validate_integer 'margin', params['margin']
       @color = params['color']
 
+      params['title'] ||= 'Dashboard'
+      @title = params['title']
+
       if @rows < 1 or @columns < 1 or @height < 1 or @width < 1
         raise ArgumentError, "None of row count, column count, height or width for board can be less than 1", caller
       end
@@ -74,7 +77,7 @@ module Dashboard
       @column_width = (@width - ((@columns - 1) * @margin)) / @columns
     end
 
-    attr_accessor :rows, :columns, :width, :height, :margin, :color, :dashes, :row_height, :column_width
+    attr_accessor :rows, :columns, :width, :height, :margin, :color, :title, :dashes, :row_height, :column_width
   end
 
   class Dash

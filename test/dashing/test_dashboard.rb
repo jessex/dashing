@@ -89,6 +89,7 @@ class TestDashboard < Test::Unit::TestCase
     assert_equal 900, dashboard.height
     assert_equal 10, dashboard.margin
     assert_nil dashboard.color, 'Did not specify dashboard color, should be nil'
+    assert_equal 'Dashboard', dashboard.title, 'Did not specify dashboard title, should default to "Dashboard"'
 
     dashes = dashboard.dashes
     assert_equal 1, dashes.length, 'Should be only one dash in the dashboard list of dashes'
