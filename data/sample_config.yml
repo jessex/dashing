@@ -4,6 +4,7 @@ columns: 4
 width: 1440
 height: 900
 margin: 10
+color: '#00CCDD'
 dashes:
   test_1:
     row: 0
