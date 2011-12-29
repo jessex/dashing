@@ -4,8 +4,8 @@
         <link rel="stylesheet" type="text/css" href="css/text.css" />
         <link rel="stylesheet" type="text/css" href="css/board.css" />
     </head>
-    <body>
-        <div class="board" style="width: <%= board.width %>px; height: <%= board.height %>px; background-color: <%= board.color%>">
+    <body bgcolor="<%= board.color%>">
+        <div class="board" style="width: <%= board.width %>px; height: <%= board.height %>px;">
             <% board.dashes.each do |dash| %>
                 <% left = (board.column_width + board.margin) * dash.column %>
                 <% top = (board.row_height + board.margin) * dash.row %>
