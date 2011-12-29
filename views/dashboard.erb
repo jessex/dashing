@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title><%= board.title %></title>
+        <link rel="stylesheet" type="text/css" href="css/text.css" />
+        <link rel="stylesheet" type="text/css" href="css/board.css" />
+    </head>
+    <body>
+        <div class="board" style="width: <%= board.width %>px; height: <%= board.height %>px; background-color: <%= board.color%>">
+            <% board.dashes.each do |dash| %>
+                <% left = (board.column_width + board.margin) * dash.column %>
+                <% top = (board.row_height + board.margin) * dash.row %>
+                <% width = (board.column_width * dash.width) + (board.margin * (dash.width - 1)) %>
+                <% height = (board.row_height * dash.height) + (board.margin * (dash.height - 1)) %>
+                <div id="<%= dash.name %>" class="dash" style="left: <%= left %>px; top: <%= top %>px; width: <%= width %>px; height: <%= height %>px;"><%= dash.name %></div>
+            <% end %>
+        </div>
+    </body>
+</html>
