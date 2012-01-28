@@ -80,7 +80,7 @@ class TestDashboard < Test::Unit::TestCase
     end
 
     config['dashes'] = {'test' => {'row' => 1, 'column' => 1, 'width' => 2, 'height' => 2,
-                                   'data' => {'key' => 'value'}}}
+                                   'data' => {'key' => 'value'}, 'color' => 'green'}}
 
     dashboard = Dashboard::Board.new config
     assert_equal 2, dashboard.rows
@@ -96,6 +96,7 @@ class TestDashboard < Test::Unit::TestCase
 
     dash = dashes[0]
     assert_equal 'test', dash.name
+    assert_equal 'green', dash.color
     assert_equal 1, dash.row
     assert_equal 1, dash.column
     assert_equal 2, dash.width

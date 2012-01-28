@@ -90,8 +90,9 @@ module Dashboard
       @height = Dashboard.validate_integer 'height', params['height']
       @refresh_rate = params['refresh_rate']
       @data = params['data']
+      @color = params['color']
     end
 
-    attr_accessor :name, :type, :row, :column, :width, :height, :refresh_rate, :data
+    attr_accessor :name, :type, :row, :column, :width, :height, :refresh_rate, :data, :color
   end
 end

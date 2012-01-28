@@ -13,7 +13,7 @@
                 <% top = (board.row_height + board.margin) * dash.row %>
                 <% width = (board.column_width * dash.width) + (board.margin * (dash.width - 1)) %>
                 <% height = (board.row_height * dash.height) + (board.margin * (dash.height - 1)) %>
-                <div id="<%= dash.name %>" class="dash" style="left: <%= left %>px; top: <%= top %>px; width: <%= width %>px; height: <%= height %>px;"><%= dash.name %></div>
+                <div id="<%= dash.name %>" class="dash" style="left: <%= left %>px; top: <%= top %>px; width: <%= width %>px; height: <%= height %>px; background-color: <%= dash.color %>"><%= dash.name %></div>
             <% end %>
         </div>
     </body>
